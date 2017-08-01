@@ -1,0 +1,17 @@
+{
+    "name": "matheus/pjbank-php-sdk",
+    "description": "PJBank PHP SDK",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Matheus Fidelis",
+            "email": "matheus.fidelis@superlogica.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+    "autoload": {
+        "psr-4": {"PJBank\\": "src/"}
+            
+      }
+}
