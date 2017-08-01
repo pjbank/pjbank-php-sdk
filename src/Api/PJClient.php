@@ -8,45 +8,14 @@ namespace PJBank\Api;
  * Date: 01/08/17
  * Time: 15:13
  */
-class PJClient
+class PJBankClient extends Api
 {
 
-    private $api = "";
+    private $headers = array();
 
-    private $version = "v3";
-
-    private $resource;
-
-    public function resource($resource) {
-
+    public function __construct($credencial, $chave)
+    {
+        array_push($this->headers, ["X-CHAVE" => $chave, "X-CREDENCIAL" => $credencial]);
     }
-
-    public function generateQueryString(array $query) {
-        return http_build_query($query);
-    }
-
-    public function post($resource, $data) {
-
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => 'http://testcURL.com',
-            CURLOPT_USERAGENT => 'Codular Sample cURL Request',
-            CURLOPT_POST => 1,
-            CURLOPT_POSTFIELDS => $data
-        ));
-
-        $resp = curl_exec($curl);
-        curl_close($curl);
-
-    }
-
-    public function get($resource, $data) {
-
-        $queryParams = $this->generateQueryString($data);
-
-
-    }
-
 
 }

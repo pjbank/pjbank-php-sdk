@@ -102,6 +102,101 @@ class Boleto
     private $nosso_numero;
 
     /**
+     * @var
+     */
+    private $credencial_boleto;
+
+    /**
+     * @var
+     */
+    private $chave_boleto;
+
+    /**
+     * Boleto constructor.
+     * @param $credencial
+     * @param $chave
+     */
+    public function __construct($credencial, $chave)
+    {
+        $this->credencial_boleto = $credencial;
+        $this->chave_boleto = $chave;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param mixed $link
+     * @return Boleto
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNossoNumero()
+    {
+        return $this->nosso_numero;
+    }
+
+    /**
+     * @param mixed $nosso_numero
+     * @return Boleto
+     */
+    public function setNossoNumero($nosso_numero)
+    {
+        $this->nosso_numero = $nosso_numero;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCredencialBoleto()
+    {
+        return $this->credencial_boleto;
+    }
+
+    /**
+     * @param mixed $credencial_boleto
+     * @return Boleto
+     */
+    public function setCredencialBoleto($credencial_boleto)
+    {
+        $this->credencial_boleto = $credencial_boleto;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChaveBoleto()
+    {
+        return $this->chave_boleto;
+    }
+
+    /**
+     * @param mixed $chave_boleto
+     * @return Boleto
+     */
+    public function setChaveBoleto($chave_boleto)
+    {
+        $this->chave_boleto = $chave_boleto;
+        return $this;
+    }
+
+
+
+    /**
      * @return date
      */
     public function getVencimento()
@@ -395,6 +490,7 @@ class Boleto
      */
     public function gerar() {
 
+        $emissor = new Emissor($this);
     }
 
 

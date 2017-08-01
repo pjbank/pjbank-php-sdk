@@ -9,14 +9,14 @@
 namespace PJBank\Boleto;
 
 use PJBank\Boleto;
-
+use PJBank\Api\PJBankClient;
 
 class Emissor
 {
 
     public function emitir(Boleto $boleto) {
 
-
+        $client = new PJBankClient();
 
     }
 }
