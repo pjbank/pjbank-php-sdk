@@ -135,16 +135,6 @@ class Boleto
     }
 
     /**
-     * @param mixed $link
-     * @return Boleto
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getNossoNumero()
@@ -153,13 +143,21 @@ class Boleto
     }
 
     /**
-     * @param mixed $nosso_numero
-     * @return Boleto
+     * Undocumented function
+     * @return void
      */
-    public function setNossoNumero($nosso_numero)
+    public function getIdUnico()
     {
-        $this->nosso_numero = $nosso_numero;
-        return $this;
+        return $this->id_unico;
+    }
+
+    /**
+     * Undocumented function
+     * @return void
+     */
+    public function getLinhaDigitavel()
+    {
+        return $this->linha_digitavel;
     }
 
     /**
@@ -519,7 +517,6 @@ class Boleto
         $this->id_unico = $boletoGerado->id_unico;
         $this->linha_digitavel = $boletoGerado->linhaDigitavel;
         $this->link = $boletoGerado->linkBoleto;
-
     }
 
 
