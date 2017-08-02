@@ -106,6 +106,10 @@ class Boleto
      */
     private $credencial_boleto;
 
+    private $linha_digitavel;
+    
+    private $id_unico;
+
     /**
      * @var
      */
@@ -486,11 +490,36 @@ class Boleto
 
 
     /**
+     * Pega os campos utilizados para a emissão do boleto bancário. 
+     * @return array
+     */
+    public function getValues() 
+    {
+        $objectValues = get_object_vars($this);
+        $boletoValues = array();
+        foreach ($objectValues as $key => $value) {
+            if (!is_null($value)) {
+                $boletoValues[$key] = $value;
+            }
+        }
+
+        return $boletoValues;
+    }
+
+
+
+    /**
      * Gera um boleto bancário no PJBank
      */
     public function gerar() {
-
         $emissor = new Emissor($this);
+        $boletoGerado = $emissor->emitir();
+
+        $this->nosso_numero = $boletoGerado->nossonumero;
+        $this->id_unico = $boletoGerado->id_unico;
+        $this->linha_digitavel = $boletoGerado->linhaDigitavel;
+        $this->link = $boletoGerado->linkBoleto;
+
     }
 
 

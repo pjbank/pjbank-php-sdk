@@ -8,15 +8,43 @@
 
 namespace PJBank\Boleto;
 
-use PJBank\Boleto;
+use PJBank\Boleto\Boleto;
 use PJBank\Api\PJBankClient;
+
 
 class Emissor
 {
 
-    public function emitir(Boleto $boleto) {
+    /**
+     * Undocumented variable*
+     * @var [type]
+     */
+    private $boleto;
 
-        $client = new PJBankClient();
+    /**
+     * Undocumented function
+     * @param Boleto $boleto
+     */
+    public function __construct(Boleto $boleto) {
+        $this->boleto = $boleto;
+    }
 
+    /**
+     * Emite um boleto bancário via API
+     * @return Boleto
+     */
+    public function emitir() {
+
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();        
+        $boletoItens = $this->boleto->getValues();
+
+        $res = $client->request('POST','boleto', ['json' => $boletoItens, 'headers' => [
+                'Content-Type' => 'Application/json',
+                'X-CREDENCIAL' => $this->boleto->getCredencialBoleto(), 
+                'X-CHAVE' => $this->boleto->getChaveBoleto()
+                ]]);
+
+        return json_decode((string) $res->getBody());
     }
 }
