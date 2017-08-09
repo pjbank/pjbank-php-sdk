@@ -12,8 +12,7 @@ $PJBankRecebimentos = new Recebimento($credencial, $chave);
 echo("Gerando o extrato somente com recebiments liquidados" . PHP_EOL);
 
 $extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
-$extrato
-    ->apenasPagos()
+$extrato->apenasPagos()
     ->gerar();
 
 
