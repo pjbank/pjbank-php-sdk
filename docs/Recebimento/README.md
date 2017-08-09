@@ -129,3 +129,88 @@ $transacao->setNumeroCartao("4012001037141112")
 print_r($transacao->getValues());
 
 ```
+
+### Cancelando uma transação de cartão
+
+> Todo pagamento via cartão retorna um parâmetro chamado `tid`. Esse parâmetro equivale ao identificador da transação entre o PJBank e as adquirentes. 
+
+```php
+
+require_once "./vendor/autoload.php";
+
+use PJBank\Recebimento;
+
+$credencial = "1264e7bea04bb1c24b07ace759f64a1bd65c8560";
+$chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
+
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+
+//Gerando uma transação de exemplo
+$transacao = $PJBankRecebimentos->Cartoes->NovaTransacao();
+
+$transacao->setNumeroCartao("4012001037141112")
+    ->setValor(1.00)
+    ->setTokenCartao("d30e4fc83e153ffb113af7e7c736f4bb5004c552")
+    ->setDescricao("Pagamento de exemplo com Token")
+    ->gerar();
+
+
+//Cancelamento a transação criada
+$cancelamento = $PJBankRecebimentos->Cartoes->CancelarTransacao($transacao->getTid());
+
+print_r($cancelamento);
+
+```
+
+## Extrato
+
+### Extrato simples
+
+> Gerando um extrato da conta sem filtros.
+
+```php
+require_once "./vendor/autoload.php";
+
+use PJBank\Recebimento;
+
+$credencial = "1264e7bea04bb1c24b07ace759f64a1bd65c8560";
+$chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
+
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+
+echo("Gerando o extrato bancário da conta sem filtros" . PHP_EOL);
+
+$extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
+$extrato->gerar();
+
+print_r($extrato->getItens());
+```
+
+### Extrato - Listando somente as cobranças liquidadas
+
+> Gerando um extrato somente com os itens que foram pagos 
+
+```php
+
+$extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
+$extrato->apenasPagos()
+    ->gerar();
+
+print_r($extrato->getItens());
+```
+
+### Extrato - Filtro por data
+
+> Você pode inserir um filtro por um intervalo de datas no extrato. As datas devem ser informadas no formato MM/DD/AAAA
+
+```php
+
+$extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
+$extrato
+    ->setDataInicio("06/01/2017")
+    ->setDataFim("06/30/2017")
+    ->gerar();
+
+print_r($extrato->getItens());
+```
+
