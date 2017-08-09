@@ -42,6 +42,18 @@ class Extrato
     private $pago;
 
     /**
+     * Paginação
+     * @var int
+     */
+    private $pagina = 1;
+
+    /**
+     * Itens do extrato
+     * @var
+     */
+    private $itens;
+
+    /**
      * @return mixed
      */
     public function getCredencial()
@@ -125,9 +137,19 @@ class Extrato
      * @param mixed $pago
      * @return Extrato
      */
-    public function setPago($pago)
+    public function apenasPagos($pago = true)
     {
         $this->pago = $pago;
+        return $this;
+    }
+
+    /**
+     * @param int $pagina
+     * @return $this
+     */
+    public function setPagina($pagina = 1)
+    {
+        $this->pagina = $pagina;
         return $this;
     }
 
@@ -140,6 +162,45 @@ class Extrato
     {
         $this->credencial = $credencial;
         $this->chave = $chave;
+    }
+
+    /**
+     * Retorna os itens do extrato
+     * @return mixed
+     */
+    public function getItens()
+    {
+        return $this->itens;
+    }
+
+
+    /**
+     * Retorna os atributos preenchidos para serem emitidos no extrato
+     * @return array
+     */
+    public function getValues()
+    {
+        $objectValues = get_object_vars($this);
+        $transacaoValues = array();
+        foreach ($objectValues as $key => $value) {
+            if (!is_null($value)) {
+                $transacaoValues[$key] = $value;
+            }
+        }
+
+        return $transacaoValues;
+    }
+
+    /**
+     * Gera o extrato propriamente dito
+     */
+    public function gerar() {
+
+        $impressorinha = new Impressorinha($this);
+        $extrato = $impressorinha->gerar();
+
+        $this->itens = $extrato->extrato;
+
     }
 
 }

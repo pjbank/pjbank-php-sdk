@@ -15,13 +15,12 @@ class Emissor
 {
 
     /**
-     * Undocumented variable*
-     * @var [type]
+     * @var Boleto
      */
     private $boleto;
 
     /**
-     * Undocumented function
+     * Emissor constructor.
      * @param Boleto $boleto
      */
     public function __construct(Boleto $boleto)

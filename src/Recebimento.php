@@ -4,6 +4,7 @@ namespace PJBank;
 
 use PJBank\Boleto\BoletosManager;
 use PJBank\Cartao\CartaoManager;
+use PJBank\Extrato\ExtratoManager;
 
 /**
  * Class PJBank
@@ -38,6 +39,12 @@ class Recebimento
     public $Cartoes;
 
     /**
+     * ExtratoManager SDK
+     * @var
+     */
+    public $Extratos;
+
+    /**
      * Conta Digital Manager SDk
      * @var
      */
@@ -54,22 +61,30 @@ class Recebimento
         $this->credencial = $credencial;
         $this->chave = $chave;
 
-        $this->constructorBoletos();
         $this->constructorCartao();
+        $this->constructorBoletos();
+        $this->constructorExtrato();
     }
 
     /**
      * Constructor de Transacoes de Cartão
      */
-    public function constructorCartao() {
+    private function constructorCartao() {
         $this->Cartoes = new CartaoManager($this->credencial, $this->chave);
     }
 
     /**
      * Constructor Boletos
      */
-    public function constructorBoletos() {
+    private function constructorBoletos() {
         $this->Boletos = new BoletosManager($this->credencial, $this->chave);
+    }
+
+    /**
+     * Constructor Extrato
+     */
+    private function constructorExtrato() {
+        $this->Extratos = new ExtratoManager($this->credencial, $this->chave);
     }
 
 
