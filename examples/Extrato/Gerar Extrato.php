@@ -24,11 +24,22 @@ echo("Gerando o extrato filtrado por data" . PHP_EOL);
 $extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
 $extrato
     ->setDataInicio("06/01/2017")
-    ->setDataFim("01/30/2017")
+    ->setDataFim("06/30/2017")
     ->gerar();
 
 
 print_r($extrato->getItens());
+
+
+echo("Gerando o extrato paginado - 50 Itens por página" . PHP_EOL);
+
+$extrato = $PJBankRecebimentos->Extratos->NovoExtrato();
+$extrato->setPagina(2)
+    ->gerar();
+
+
+print_r($extrato->getItens());
+
 
 
 
