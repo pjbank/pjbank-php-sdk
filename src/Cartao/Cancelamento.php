@@ -49,7 +49,7 @@ class Cancelamento
         try {
 
             $resource = "recebimento/{$this->credencial_cartao}/transacoes/{$tid}";
-            
+
             $res = $client->request('DELETE', $resource, ['json' => [], 'headers' => [
                 'Content-Type' => 'Application/json',
                 'X-CHAVE' => $this->chave_cartao
@@ -60,10 +60,7 @@ class Cancelamento
         } catch (ClientException $e) {
 
             $responseBody = json_decode($e->getResponse()->getBody());
-            print_r($responseBody);
-            die();
             throw new \Exception($responseBody->msg, $responseBody->status);
-
 
         }
     }
