@@ -55,4 +55,25 @@ class CartaoManager
         return $cancelamento->cancelarTransacao($tid);
     }
 
+    /**
+     * Tokeniza um cartão para sua conta
+     * @param $array
+     * @return mixed
+     */
+    public function Tokenizar($array) {
+
+        $token = new Token($this->credencial_cartao, $this->chave_cartao);
+
+        $test = $token->setAnoVencimento($array['ano_vencimento'])
+            ->setMesVencimento($array['mes_vencimento'])
+            ->setCodigoCvv($array['codigo_cvv'])
+            ->setNumeroCartao($array['numero_cartao'])
+            ->setNomeCartao($array['nome_cartao'])
+            ->setCpfCartao($array['cpf_cartao'])
+            ->gerar();
+
+        return $token->getTokenCartao();
+
+    }
+
 }
