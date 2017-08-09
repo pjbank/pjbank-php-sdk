@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../vendor/autoload.php";
+require_once "../../../../vendor/autoload.php";
 
 use PJBank\Recebimento;
 
@@ -9,17 +9,14 @@ $chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
 
 $PJBankRecebimentos = new Recebimento($credencial, $chave);
 
-//Gerando uma transação de exemplo
 $transacao = $PJBankRecebimentos->Cartoes->NovaTransacao();
 
+//Pagando com os token gerado pelo PJBank!
 $transacao->setNumeroCartao("4012001037141112")
     ->setValor(1.00)
     ->setTokenCartao("d30e4fc83e153ffb113af7e7c736f4bb5004c552")
     ->setDescricao("Pagamento de exemplo com Token")
     ->gerar();
 
+print_r($transacao->getValues());
 
-//Cancelamento a transação criada
-$cancelamento = $PJBankRecebimentos->Cartoes->CancelarTransacao($transacao->getTid());
-
-print_r($cancelamento);
