@@ -2,6 +2,10 @@
 
 namespace PJBank\Cartao;
 
+use PJBank\Api\PJBankClient;
+
+use GuzzleHttp\Exception\ClientException;
+
 /**
  * Class Cancelamento
  * @author Matheus Fidelis <matheus.fidelis@superlogica.com>
@@ -39,6 +43,29 @@ class Cancelamento
     public function cancelarTransacao($tid)
     {
 
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();
+
+        try {
+
+            $resource = "recebimento/{$this->credencial_cartao}/transacoes/{$tid}";
+            
+            $res = $client->request('DELETE', $resource, ['json' => [], 'headers' => [
+                'Content-Type' => 'Application/json',
+                'X-CHAVE' => $this->chave_cartao
+            ]]);
+
+            return json_decode((string)$res->getBody());
+
+        } catch (ClientException $e) {
+
+            $responseBody = json_decode($e->getResponse()->getBody());
+            print_r($responseBody);
+            die();
+            throw new \Exception($responseBody->msg, $responseBody->status);
+
+
+        }
     }
 
 }

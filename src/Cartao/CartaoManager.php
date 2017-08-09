@@ -4,6 +4,7 @@ namespace PJBank\Cartao;
 
 /**
  * Class CartaoManager
+ * @author Matheus Fidelis <matheus.fidelis@superlogica.com>
  * @package PJBank\Cartao
  */
 class CartaoManager
@@ -36,12 +37,20 @@ class CartaoManager
      * Cria uma nova transação de cartão de crédito
      * @return \Transacao
      */
-    public function NovaTransacao() {
+    public function NovaTransacao()
+    {
         return new Transacao($this->credencial_cartao, $this->chave_cartao);
     }
 
-    public function CancelarTransacao($tid) {
-        return new Cancelamento($this->credencial_cartao, $this->chave_cartao);
+    /**
+     * Cancela uma transaçao de cartão de crédito
+     * @param $tid ID da transação
+     * @return bool
+     */
+    public function CancelarTransacao($tid)
+    {
+        $cancelamento = new Cancelamento($this->credencial_cartao, $this->chave_cartao);
+        return $cancelamento->cancelarTransacao($tid);
     }
 
 }
