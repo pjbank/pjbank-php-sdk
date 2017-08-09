@@ -3,13 +3,14 @@
 namespace PJBank;
 
 use PJBank\Boleto\BoletosManager;
+use PJBank\Cartao\CartaoManager;
 
 /**
  * Class PJBank
  * @author Matheus Fidelis
  * @email matheus.fidelis@superlogica.com
  */
-class PJBank
+class Recebimento
 {
 
     /**
@@ -25,10 +26,23 @@ class PJBank
     private $chave;
 
     /**
-     *
+     * Boleto Manager SDK
      * @var Boleto
      */
     public $Boletos;
+
+    /**
+     * Cartões Manager SDK
+     * @var
+     */
+    public $Cartoes;
+
+    /**
+     * Conta Digital Manager SDk
+     * @var
+     */
+    public $ContaDigital;
+
 
     /**
      * PJBank constructor
@@ -41,30 +55,23 @@ class PJBank
         $this->chave = $chave;
 
         $this->constructorBoletos();
+        $this->constructorCartao();
     }
 
+    /**
+     * Constructor de Transacoes de Cartão
+     */
     public function constructorCartao() {
-
+        $this->Cartoes = new CartaoManager($this->credencial, $this->chave);
     }
 
+    /**
+     * Constructor Boletos
+     */
     public function constructorBoletos() {
         $this->Boletos = new BoletosManager($this->credencial, $this->chave);
     }
 
-    /**
-     * Gera um novo boleto
-     * @return Boleto
-     */
-    public function NovoBoleto() {
-        return (new \Boleto($this->credencial, $this->chave));
-    }
-
-    /**
-     *
-     */
-    public function Cartao() {
-        return (new \Transacao($this->credencial, $this->chave));
-    }
 
 
 }

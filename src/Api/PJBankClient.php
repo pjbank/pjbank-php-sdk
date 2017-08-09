@@ -5,10 +5,8 @@ namespace PJBank\Api;
 use GuzzleHttp\Client;
 
 /**
- * Created by PhpStorm.
- * User: matheus
- * Date: 01/08/17
- * Time: 15:13
+ * Client Factory
+ * @author Matheus fidelis
  */
 class PJBankClient extends Api
 {

@@ -2,7 +2,6 @@
 
 namespace PJBank\Boleto;
 
-use PJBank\Boleto\Boleto;
 
 /**
  * Class PJBank Boletos
@@ -29,10 +28,10 @@ class BoletosManager
      * @param $credencial
      * @param $boletos
      */
-    public function __construct($credencial, $boletos)
+    public function __construct($credencial, $chave)
     {
         $this->credencial_boletos = $credencial;
-        $this->chave_boletos = $boletos;
+        $this->chave_boletos = $chave;
     }
 
     /**
@@ -41,6 +40,15 @@ class BoletosManager
      */
     public function NovoBoleto() {
         return new Boleto($this->credencial_boletos, $this->chave_boletos);
+    }
+
+    /**
+     * Gera o link do PDF com um ou mais boletos
+     * @param array $boletos
+     */
+    public function Imprimir(array $boletos) {
+        $impressor = new Impressor($this->credencial_boletos, $this->chave_boletos);
+        return $impressor->imprimirEmLotes($boletos);
     }
 
 

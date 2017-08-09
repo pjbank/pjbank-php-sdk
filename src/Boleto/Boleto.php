@@ -100,6 +100,11 @@ class Boleto
      * @var
      */
     private $nosso_numero;
+    /**
+     * Numero do pedido informado pelo cliente
+     * @var
+     */
+    private $pedido_numero;
 
     /**
      * @var
@@ -149,6 +154,24 @@ class Boleto
     public function getIdUnico()
     {
         return $this->id_unico;
+    }
+
+    /**
+     * Setter do numero do pedido
+     * @param $pedido_numero
+     */
+    public function setPedidoNumero($pedido_numero)
+    {
+        $this->pedido_numero = $pedido_numero;
+        return $this;
+    }
+
+    /**
+     * Numero do pedido
+     * @return mixed
+     */
+    public function getPedidoNumero() {
+        return $this->pedido_numero;
     }
 
     /**
@@ -508,6 +531,7 @@ class Boleto
 
     /**
      * Gera um boleto bancário no PJBank
+     * via API
      */
     public function gerar() {
         $emissor = new Emissor($this);

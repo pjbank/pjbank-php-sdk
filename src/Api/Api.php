@@ -1,23 +1,37 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: matheus
- * Date: 01/08/17
- * Time: 17:32
- */
 
 namespace PJBank\Api;
 
-
+/**
+ * API Configuration Manager
+ * @author Matheus Fideliss
+ * @package PJBank\Api
+ */
 class Api
 {
 
-    protected $apiBaseUrl = "https://wau8eql282.execute-api.sa-east-1.amazonaws.com/estagio/";
+    /**
+     * URL base da API
+     * @var string
+     */
+    protected $apiBaseUrl = "https://api.pjbank.com.br/";
 
+    /**
+     * Versão da API a ser consumida pelo SDK
+     * @var string
+     */
     protected $version = "v3";
 
+    /**
+     * Resource a ser acessado
+     * @var
+     */
     protected $resource;
 
+    /**
+     * Headers a serem enviados na requisição para a API
+     * @var array
+     */
     protected $headers = array();
 
 }
