@@ -10,14 +10,11 @@
 $ composer require pjbank/pjbank-sdk-php
 ```
 
-## Boleto bancário.
+## Boleto bancário
 
 ### Emitindo um boleto bancário
 
 ```php
-
-<?php
-
 require_once "./vendor/autoload.php";
 
 use PJBank\Recebimento;
@@ -25,8 +22,10 @@ use PJBank\Recebimento;
 $credencial = "6ef5e5c493f22ef42d1c052e069af5df3060c090";
 $chave = "cfeb3e01f0d7d2217fc5f522f73c67ea56e5a669";
 
+
 $PJBankRecebiementos = new Recebimento($credencial, $chave);
 $boleto = $PJBankRecebiementos->Boletos->NovoBoleto();
+
 
 $boleto->setNomeCliente("Matheus Fidelis")
     ->setCpfCliente("29454730000144")
@@ -35,9 +34,98 @@ $boleto->setNomeCliente("Matheus Fidelis")
     ->setPedidoNumero(rand(0, 999))
     ->gerar();
 
+
 print_r($boleto->getNossoNumero() . PHP_EOL);
 print_r($boleto->getLink() .  PHP_EOL);
 print_r($boleto->getPedidoNumero() . PHP_EOL);
 
+```
+
+
+### Impressão de boletos
+
+> Você pode especificar vários boletos identificados pelo `pedido_numero` para gerar uma impressão em lote.
+
+
+```php
+
+require_once "./vendor/autoload.php";
+
+use PJBank\Recebimento;
+
+$credencial = "6ef5e5c493f22ef42d1c052e069af5df3060c090";
+$chave = "cfeb3e01f0d7d2217fc5f522f73c67ea56e5a669";
+
+$PJBankRecebimento = new Recebimento($credencial, $chave);
+
+$lote =  $PJBankRecebimento->Boletos->Imprimir([
+    "110",
+    "443"
+]);
+
+print_r($lote);
+
+```
+
+
+## Carto de Crédito
+
+### Gerando um pagamento de cartão de crédito com os dados do cartão
+
+```php
+
+require_once "./vendor/autoload.php";
+
+use PJBank\Recebimento;
+
+$credencial = "1264e7bea04bb1c24b07ace759f64a1bd65c8560";
+$chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
+
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+
+$transacao = $PJBankRecebimentos->Cartoes->NovaTransacao();
+
+//Pagando com os dados do cartão
+$transacao->setNumeroCartao("4012001037141112")
+    ->setNomeCartao("Cliente de Exemplo")
+    ->setMesVencimento("05")
+    ->setAnoVencimento("2018")
+    ->setCPF("24584548000194")
+    ->setEmail("api@pjbank.com.br")
+    ->setCVV("123")
+    ->setValor("1.00")
+    ->setParcelas(1)
+    ->setDescricao("Pagamento de exemplo")
+    ->gerar();
+
+print_r($transacao->getValues());
+
+```
+
+### Gerando um pagamento de cartão de crédito com Token
+
+> Após o primeiro pagamento, um `token_cartao` será gerado. Use este token para pagar de forma segura nas próximas vezes conforme as recomendações do PCI
+
+```php
+
+require_once "./vendor/autoload.php";
+
+use PJBank\Recebimento;
+
+$credencial = "1264e7bea04bb1c24b07ace759f64a1bd65c8560";
+$chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
+
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+
+$transacao = $PJBankRecebimentos->Cartoes->NovaTransacao();
+
+//Pagando com os token gerado pelo PJBank!
+$transacao->setNumeroCartao("4012001037141112")
+    ->setValor(1.00)
+    ->setTokenCartao("d30e4fc83e153ffb113af7e7c736f4bb5004c552")
+    ->setDescricao("Pagamento de exemplo com Token")
+    ->gerar();
+
+print_r($transacao->getValues());
 
 ```
