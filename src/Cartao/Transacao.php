@@ -594,6 +594,4 @@ class Transacao
 
 
 
-
-
 }

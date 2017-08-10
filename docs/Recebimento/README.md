@@ -162,6 +162,39 @@ print_r($cancelamento);
 
 ```
 
+### Tokenizando um cartão
+
+> No primeiro pagamento com os dados do Cartão, o parâmetro `token_cartao` será retornado. Mas há casos onde o usuário não vai efetuar a compra no momento da captura dos dados, e por segurança não é recomendado armazenar os mesmos. Para resolver esse problema, você pode enviar os dados recém capturados para a API e trocar os mesmos por um token do cartão.
+
+```php
+
+use PJBank\Recebimento;
+
+$credencial = "1264e7bea04bb1c24b07ace759f64a1bd65c8560";
+$chave = "ef947cf5867488f744b82744dd3a8fc4852e529f";
+
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+
+/**
+ * Array de exemplo com os dados do cartão
+ */
+$dadosCartao = array(
+    "nome_cartao" =>  "Cliente Exemplo",
+    "numero_cartao" => "4012001037141112",
+    "mes_vencimento" => 05,
+    "ano_vencimento" => 2018,
+    "cpf_cartao" => "64111456529",
+    "email_cartao" => "api@pjbank.com.br",
+    "celular_cartao" => "978456723",
+    "codigo_cvv" => 123
+);
+
+$token = $PJBankRecebimentos->Cartoes->Tokenizar($dadosCartao);
+
+print_r($token);
+
+```
+
 ## Extrato
 
 ### Extrato simples
