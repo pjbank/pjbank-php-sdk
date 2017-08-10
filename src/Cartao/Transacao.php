@@ -1,6 +1,7 @@
 <?php
 
 namespace PJBank\Cartao;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  * Class Transacao
@@ -567,6 +568,27 @@ class Transacao
 
         }
 
+    }
+
+    /**
+     * Tokenizar um cartão de crédito
+     * @return mixed
+     * @throws \Exception
+     */
+    public function tokenizar() {
+
+        $maquininha = new Maquininha($this);
+
+        try {
+            $transacaoDeToken = $maquininha->tokenizarCartao();
+
+            print_r($transacaoDeToken); die();
+        } catch (ClientException $e) {
+
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+
+        }
 
     }
 

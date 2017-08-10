@@ -61,7 +61,42 @@ class Maquininha
             
         }
 
+    }
 
+    /**
+     * Tokeniza um cartão de crédito
+     * @return string cartão tokenizado
+     * @throws \Exception
+     */
+    public function tokenizarCartao()
+    {
+
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();
+
+        $tokenItens = $this->transacao->getValues();
+
+        unset($tokenItens['credencial_cartao']);
+        unset($tokenItens['chave_cartao']);
+
+        try {
+
+            $resource = "recebimento/{$this->transacao->getCredencialCartao()}/tokenizar";
+
+            $res = $client->request('POST', $resource, ['json' => $tokenItens, 'headers' => [
+                'Content-Type' => 'Application/json',
+                'X-CHAVE' => $this->transacao->getChaveCartao()
+            ]]);
+
+            $result = json_decode((string)$res->getBody());
+            return $result->token_cartao;
+
+        } catch (ClientException $e) {
+
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+
+        }
     }
 
 }

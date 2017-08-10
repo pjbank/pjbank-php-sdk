@@ -7,7 +7,7 @@ use PJBank\Cartao\CartaoManager;
 use PJBank\Extrato\ExtratoManager;
 
 /**
- * Class PJBank
+ * Class Recebimento
  * @author Matheus Fidelis
  * @email matheus.fidelis@superlogica.com
  */

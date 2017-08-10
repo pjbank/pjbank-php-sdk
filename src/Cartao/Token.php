@@ -268,7 +268,9 @@ class Token
 
 
     /**
-     * Gera um Token
+     * Gera um Token a partir dos dados de cartão informado.
+     * Esse token só é válido para essa credencial de conta
+     * tornando inútil caso seja utilizado sem a credencial e chave
      */
     public function gerar()
     {
@@ -300,9 +302,7 @@ class Token
             $responseBody = json_decode($e->getResponse()->getBody());
             throw new \Exception($responseBody->msg, $responseBody->status);
 
-
         }
-
 
     }
 }
