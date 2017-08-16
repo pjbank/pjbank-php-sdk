@@ -53,7 +53,6 @@ class Emissor
         } catch (ClientException $e) {
 
             $responseBody = json_decode($e->getResponse()->getBody());
-            print_r($responseBody); die();
             throw new \Exception($responseBody->msg, $responseBody->status);
 
         }
