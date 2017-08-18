@@ -23,8 +23,8 @@ $credencial = "6ef5e5c493f22ef42d1c052e069af5df3060c090";
 $chave = "cfeb3e01f0d7d2217fc5f522f73c67ea56e5a669";
 
 
-$PJBankRecebiementos = new Recebimento($credencial, $chave);
-$boleto = $PJBankRecebiementos->Boletos->NovoBoleto();
+$PJBankRecebimentos = new Recebimento($credencial, $chave);
+$boleto = $PJBankRecebimentos->Boletos->NovoBoleto();
 
 
 $boleto->setNomeCliente("Matheus Fidelis")
