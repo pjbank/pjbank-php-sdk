@@ -68,7 +68,7 @@ print_r($lote);
 ```
 
 
-## Carto de Crédito
+## Cartão de Crédito
 
 ### Gerando um pagamento de cartão de crédito com os dados do cartão
 
