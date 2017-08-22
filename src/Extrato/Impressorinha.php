@@ -45,7 +45,7 @@ class Impressorinha
 
         try {
 
-            $resource = "recebimento/{$this->extrato->getCredencial()}";
+            $resource = "recebimentos/{$this->extrato->getCredencial()}/transacoes";
 
             $res = $client->request('GET',  $resource, ['query' => $extratoQuery, 'headers' => [
                 'Content-Type' => 'Application/json',

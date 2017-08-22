@@ -41,7 +41,7 @@ class Emissor
 
         try {
 
-            $resource = "recebimento/{$this->boleto->getCredencialBoleto()}/transacoes";
+            $resource = "recebimentos/{$this->boleto->getCredencialBoleto()}/transacoes";
 
             $res = $client->request('POST',  $resource, ['json' => $boletoItens, 'headers' => [
                 'Content-Type' => 'Application/json',
