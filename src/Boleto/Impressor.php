@@ -46,7 +46,7 @@ class Impressor
         $PJBankClient = new PJBankClient();
         $client = $PJBankClient->getClient();
 
-        $resource = "recebimento/{$this->credencial}/transacoes/imprimir";
+        $resource = "recebimentos/{$this->credencial}/transacoes/lotes";
 
         try {
 

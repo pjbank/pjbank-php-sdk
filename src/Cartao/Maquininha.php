@@ -45,7 +45,7 @@ class Maquininha
 
         try {
 
-            $resource = "recebimento/{$this->transacao->getCredencialCartao()}/transacoes";
+            $resource = "recebimentos/{$this->transacao->getCredencialCartao()}/transacoes";
 
             $res = $client->request('POST',  $resource, ['json' => $transacaoItens, 'headers' => [
                 'Content-Type' => 'Application/json',
@@ -81,7 +81,7 @@ class Maquininha
 
         try {
 
-            $resource = "recebimento/{$this->transacao->getCredencialCartao()}/tokenizar";
+            $resource = "recebimentos/{$this->transacao->getCredencialCartao()}/tokens";
 
             $res = $client->request('POST', $resource, ['json' => $tokenItens, 'headers' => [
                 'Content-Type' => 'Application/json',

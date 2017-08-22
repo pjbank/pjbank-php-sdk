@@ -285,7 +285,7 @@ class Token
 
         try {
 
-            $resource = "recebimento/{$this->credencial_cartao}/tokenizar";
+            $resource = "recebimentos/{$this->credencial_cartao}/tokens";
 
             $res = $client->request('POST', $resource, ['json' => $tokenItens, 'headers' => [
                 'Content-Type' => 'Application/json',

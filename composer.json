@@ -8,10 +8,16 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "guzzlehttp/guzzle": "^6.2@dev"
+        "guzzlehttp/guzzle": "^6.2@dev",
+        "phpunit/phpunit": "^6.4@dev"
+    },
+    "scripts" : {
+        "test" : "./vendor/bin/phpunit --colors --debug"
     },
     "autoload": {
-        "psr-4": { "PJBank\\": "src/" }
-
+        "psr-4": { 
+            "PJBank\\": "src/",
+            "PJBankTests\\": "tests" 
+        }
     }
 }

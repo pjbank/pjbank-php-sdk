@@ -48,7 +48,7 @@ class Cancelamento
 
         try {
 
-            $resource = "recebimento/{$this->credencial_cartao}/transacoes/{$tid}";
+            $resource = "recebimentos/{$this->credencial_cartao}/transacoes/{$tid}";
 
             $res = $client->request('DELETE', $resource, ['json' => [], 'headers' => [
                 'Content-Type' => 'Application/json',
