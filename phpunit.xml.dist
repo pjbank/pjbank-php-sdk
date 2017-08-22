@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="Bateria de Testes">
-            <directory>./Tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
