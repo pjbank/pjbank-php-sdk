@@ -12,7 +12,8 @@
         "phpunit/phpunit": "^6.4@dev"
     },
     "scripts" : {
-        "test" : "./vendor/bin/phpunit --colors --debug"
+        "test" : "./vendor/bin/phpunit --colors --debug",
+        "travis" : "phpunit --colors --debug"
     },
     "autoload": {
         "psr-4": { 
