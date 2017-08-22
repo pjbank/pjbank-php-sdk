@@ -6,6 +6,6 @@ php:
 
 before_script:
   - composer self-update
-  - composer install
+  - composer update
 
 script: "composer test"
