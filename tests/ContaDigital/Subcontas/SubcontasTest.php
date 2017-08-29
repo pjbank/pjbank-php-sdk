@@ -13,8 +13,8 @@ class SubContasTest extends \PHPUnit\Framework\TestCase
         
         $PJBankContaDigital = new ContaDigital($credencial, $chave);        
         $subconta = $PJBankContaDigital->Subcontas->criarSubconta(
-            'Matheus Mondenez', 
-            '11/01/1993', 
+            'Cliente Exemplo', 
+            '11/01/1990', 
             'M', 
             '13032385',
             'Rua Joaquim Vilac',
@@ -25,10 +25,10 @@ class SubContasTest extends \PHPUnit\Framework\TestCase
             'SP',
             '19',
             '40096800',
-            'matheus.mondenez@superlogica.com', 
+            'api@pjbank.com.br', 
             'Caixinha', 
             25.00, 
-            '74171377927'
+            '07727876208'
         );
         
         $this->assertObjectHasAttribute('nosso_numero', $subconta);
