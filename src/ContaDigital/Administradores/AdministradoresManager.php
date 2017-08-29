@@ -1,6 +1,6 @@
 <?php
 
-namespace PJBank\Conta\Administradores;
+namespace PJBank\ContaDigital\Administradores;
 
 /**
  * Class SubcontasManager

@@ -2,10 +2,10 @@
 
 namespace PJBank;
 
-use PJBank\Conta\Transacoes\TransacoesManager;
-use PJBank\Conta\Subcontas\SubcontasManager;
-use PJBank\Conta\Administradores\AdministradoresManager;
-use PJBank\Conta\Documentos\DocumentosManager;
+use PJBank\ContaDigital\Transacoes\TransacoesManager;
+use PJBank\ContaDigital\Subcontas\SubcontasManager;
+use PJBank\ContaDigital\Administradores\AdministradoresManager;
+use PJBank\ContaDigital\Documentos\DocumentosManager;
 
 class ContaDigital
 {
@@ -36,19 +36,19 @@ class ContaDigital
         $this->credencial = $credencial;
         $this->chave = $chave;
 
-        $this->constructorTransacao();
+        // $this->constructorTransacao();
         $this->constructorSubconta();
         $this->constructorAdministrador();
-        $this->constructorDocumento();
+        // $this->constructorDocumento();
     }
     
     /**
      * Constructor Transacoes
      */
-    private function constructorTransacao()
-    {
-        $this->Transacoes = new TransacoesManager($this->credencial, $this->chave);
-    }
+    // private function constructorTransacao()
+    // {
+    //     $this->Transacoes = new TransacoesManager($this->credencial, $this->chave);
+    // }
     
     /**
      * Constructor Subcontas
@@ -69,8 +69,8 @@ class ContaDigital
     /**
      * Constructor Documentos
      */
-    private function constructorDocumento()
-    {
-        $this->Documentos = new DocumentosManager($this->credencial, $this->chave);
-    }
+    // private function constructorDocumento()
+    // {
+    //     $this->Documentos = new DocumentosManager($this->credencial, $this->chave);
+    // }
 }

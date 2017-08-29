@@ -13,15 +13,6 @@ class Subconta
     public $nome_cartao;
     public $data_nascimento;
     public $sexo;
-    public $cep;
-    public $endereco;
-    public $numero;
-    public $bairro;
-    public $complemento;
-    public $cidade;
-    public $estado;
-    public $ddd;
-    public $telefone;
     public $email;
     public $produto;
     public $valor;
@@ -48,60 +39,6 @@ class Subconta
     public function setSexo($sexo)
     {
         $this->sexo = $sexo;
-        return $this;
-    }
-    
-    public function setCEP($cep)
-    {
-        $this->cep = $cep;
-        return $this;
-    }
-    
-    public function setEndereco($endereco)
-    {
-        $this->endereco = $endereco;
-        return $this;
-    }
-    
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-        return $this;
-    }
-    
-    public function setBairro($bairro)
-    {
-        $this->bairro = $bairro;
-        return $this;
-    }
-    
-    public function setComplemento($complemento)
-    {
-        $this->complemento = $complemento;
-        return $this;
-    }
-    
-    public function setCidade($cidade)
-    {
-        $this->cidade = $cidade;
-        return $this;
-    }
-    
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-        return $this;
-    }
-    
-    public function setDDD($ddd)
-    {
-        $this->ddd = $ddd;
-        return $this;
-    }
-    
-    public function setTelefone($telefone)
-    {
-        $this->telefone = $telefone;
         return $this;
     }
     
@@ -142,51 +79,6 @@ class Subconta
     public function getSexo()
     {
         return $this->sexo;
-    }
-    
-    public function getCEP()
-    {
-        return $this->cep;
-    }
-    
-    public function getEndereco()
-    {
-        return $this->endereco;
-    }
-    
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-    
-    public function getBairro()
-    {
-        return $this->bairro;
-    }
-    
-    public function getComplemento()
-    {
-        return $this->complemento;
-    }
-    
-    public function getCidade()
-    {
-        return $this->cidade;
-    }
-    
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-    
-    public function getDDD()
-    {
-        return $this->ddd;
-    }
-    
-    public function getTelefone()
-    {
-        return $this->telefone;
     }
     
     public function getEmail()
