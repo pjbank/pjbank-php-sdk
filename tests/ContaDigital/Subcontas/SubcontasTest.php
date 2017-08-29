@@ -6,12 +6,17 @@ use PJBank\ContaDigital;
 
 class SubContasTest extends \PHPUnit\Framework\TestCase
 {
+    // public function testTrue()
+    // {
+    //     $this->assertTrue(true);
+    // }
+        
     public function testCriarSubconta()
     {
         $credencial = "6ef5e5c493f22ef42d1c052e069af5df3060c090";
         $chave = "cfeb3e01f0d7d2217fc5f522f73c67ea56e5a669";
         
-        $PJBankContaDigital = new ContaDigital($credencial, $chave);
+        $PJBankContaDigital = new ContaDigital($credencial, $chave);        
         $subconta = $PJBankContaDigital->Subcontas->criarSubconta(
             'Matheus Mondenez', 
             '11/01/1993', 
