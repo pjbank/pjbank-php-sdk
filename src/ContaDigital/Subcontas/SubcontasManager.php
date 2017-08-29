@@ -50,6 +50,8 @@ class SubcontasManager
         $subconta->setProduto($produto);
         $subconta->setValor($valor);
         $subconta->setDocumento($documento);
-        $subconta->criar();
+        $data = $subconta->criar();
+        
+        return $data;
     }
 }

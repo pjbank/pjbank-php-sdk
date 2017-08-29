@@ -5,16 +5,11 @@ namespace PJBankTests\ContaDigital\Subcontas;
 use PJBank\ContaDigital;
 
 class SubContasTest extends \PHPUnit\Framework\TestCase
-{
-    // public function testTrue()
-    // {
-    //     $this->assertTrue(true);
-    // }
-        
+{        
     public function testCriarSubconta()
     {
-        $credencial = "6ef5e5c493f22ef42d1c052e069af5df3060c090";
-        $chave = "cfeb3e01f0d7d2217fc5f522f73c67ea56e5a669";
+        $credencial = "eb2af021c5e2448c343965a7a80d7d090eb64164";
+        $chave = "a834d47e283dd12f50a1b3a771603ae9dfd5a32c";
         
         $PJBankContaDigital = new ContaDigital($credencial, $chave);        
         $subconta = $PJBankContaDigital->Subcontas->criarSubconta(
@@ -35,8 +30,6 @@ class SubContasTest extends \PHPUnit\Framework\TestCase
             25.00, 
             '74171377927'
         );
-        
-        print_r($subconta);
         
         $this->assertObjectHasAttribute('nosso_numero', $subconta);
         $this->assertObjectHasAttribute('link_boleto', $subconta);
