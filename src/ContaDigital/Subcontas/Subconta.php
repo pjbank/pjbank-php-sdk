@@ -12,22 +12,31 @@ class Subconta
 {
     private $credencial_conta;
     private $chave_conta;
-    public $nome_cartao;
-    public $data_nascimento;
-    public $sexo;
-    public $cep;
-    public $endereco;
-    public $numero;
-    public $bairro;
-    public $complemento;
-    public $cidade;
-    public $estado;
-    public $ddd;
-    public $telefone;
-    public $email;
-    public $produto;
-    public $valor;
-    public $documento;
+    private $nome_cartao;
+    private $data_nascimento;
+    private $sexo;
+    private $cep;
+    private $endereco;
+    private $numero;
+    private $bairro;
+    private $complemento;
+    private $cidade;
+    private $estado;
+    private $ddd;
+    private $telefone;
+    private $email;
+    private $produto;
+    private $valor;
+    private $documento;
+    
+    //
+    // private $valorBoletoAddSaldo;
+    // public function setValorBoleto($valor)
+    // {
+    //     $this->valorBoletoAddSaldo = $valor;
+    //     return $this;
+    // }
+    //
     
     public function __construct($credencial, $chave)
     {
@@ -237,16 +246,15 @@ class Subconta
     public function criar()
     {
         $PJBankClient = new PJBankClient();
-        $client = $PJBankClient->getClient();
-        
+        $client = $PJBankClient->getClient();        
         $tokenItens = $this->getValues();
 
         try {
-
             $resource = "contadigital/{$this->getCredencialConta()}/subcontas";
 
             $res = $client->request('POST', $resource, [
-                'json' => $tokenItens, 'headers' => [
+                'json' => $tokenItens, 
+                'headers' => [
                     'Content-Type' => 'Application/json',
                     'X-CHAVE-CONTA' => $this->getChaveConta()
                 ]
@@ -254,12 +262,58 @@ class Subconta
 
             $result = json_decode((string)$res->getBody());
             return $result->data;
-
         } catch (ClientException $e) {
-
             $responseBody = json_decode($e->getResponse()->getBody());
             throw new \Exception($responseBody->msg, $responseBody->status);
+        }
+    }
+    
+    public function consultar($tokenSubconta)
+    {
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();        
+        $tokenItens = $this->getValues();
+        
+        try {
+            $resource = "contadigital/{$this->getCredencialConta()}/subcontas/{$tokenSubconta}";
 
+            $res = $client->request('GET', $resource, [
+                'headers' => [
+                    'Content-Type' => 'Application/json',
+                    'X-CHAVE-CONTA' => $this->getChaveConta()
+                ]
+            ]);
+
+            $result = json_decode((string)$res->getBody());
+            return $result->data;
+        } catch (ClientException $e) {
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+        }
+    }
+    
+    public function adicionarSaldo($tokenSubconta, $valor)
+    {
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();
+        $valorBoleto['valor'] = $valor;
+        
+        try {
+            $resource = "contadigital/{$this->getCredencialConta()}/subcontas/{$tokenSubconta}";
+        
+            $res = $client->request('POST', $resource, [
+                'json' => $valorBoleto, 
+                'headers' => [
+                    'Content-Type' => 'Application/json',
+                    'X-CHAVE-CONTA' => $this->getChaveConta()
+                ]
+            ]);
+        
+            $result = json_decode((string)$res->getBody());
+            return $result->data;
+        } catch (ClientException $e) {
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
         }
     }
 }
