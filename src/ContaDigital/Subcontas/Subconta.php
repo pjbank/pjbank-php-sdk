@@ -29,15 +29,6 @@ class Subconta
     private $valor;
     private $documento;
     
-    //
-    // private $valorBoletoAddSaldo;
-    // public function setValorBoleto($valor)
-    // {
-    //     $this->valorBoletoAddSaldo = $valor;
-    //     return $this;
-    // }
-    //
-    
     public function __construct($credencial, $chave)
     {
         $this->credencial_conta = $credencial;
