@@ -12,6 +12,7 @@ class Subconta
 {
     private $credencial_conta;
     private $chave_conta;
+<<<<<<< HEAD
     private $nome_cartao;
     private $data_nascimento;
     private $sexo;
@@ -28,6 +29,24 @@ class Subconta
     private $produto;
     private $valor;
     private $documento;
+=======
+    public $nome_cartao;
+    public $data_nascimento;
+    public $sexo;
+    public $cep;
+    public $endereco;
+    public $numero;
+    public $bairro;
+    public $complemento;
+    public $cidade;
+    public $estado;
+    public $ddd;
+    public $telefone;
+    public $email;
+    public $produto;
+    public $valor;
+    public $documento;
+>>>>>>> upstream/master
     
     public function __construct($credencial, $chave)
     {
@@ -237,6 +256,7 @@ class Subconta
     public function criar()
     {
         $PJBankClient = new PJBankClient();
+<<<<<<< HEAD
         $client = $PJBankClient->getClient();        
         $tokenItens = $this->getValues();
 
@@ -246,6 +266,18 @@ class Subconta
             $res = $client->request('POST', $resource, [
                 'json' => $tokenItens, 
                 'headers' => [
+=======
+        $client = $PJBankClient->getClient();
+        
+        $tokenItens = $this->getValues();
+
+        try {
+
+            $resource = "contadigital/{$this->getCredencialConta()}/subcontas";
+
+            $res = $client->request('POST', $resource, [
+                'json' => $tokenItens, 'headers' => [
+>>>>>>> upstream/master
                     'Content-Type' => 'Application/json',
                     'X-CHAVE-CONTA' => $this->getChaveConta()
                 ]
@@ -253,6 +285,7 @@ class Subconta
 
             $result = json_decode((string)$res->getBody());
             return $result->data;
+<<<<<<< HEAD
         } catch (ClientException $e) {
             $responseBody = json_decode($e->getResponse()->getBody());
             throw new \Exception($responseBody->msg, $responseBody->status);
@@ -305,6 +338,14 @@ class Subconta
         } catch (ClientException $e) {
             $responseBody = json_decode($e->getResponse()->getBody());
             throw new \Exception($responseBody->msg, $responseBody->status);
+=======
+
+        } catch (ClientException $e) {
+
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+
+>>>>>>> upstream/master
         }
     }
 }

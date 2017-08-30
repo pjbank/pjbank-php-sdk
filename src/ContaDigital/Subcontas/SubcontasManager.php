@@ -54,6 +54,7 @@ class SubcontasManager
         
         return $data;
     }
+<<<<<<< HEAD
     
     public function consultarSubconta($tokenSubconta)
     {
@@ -70,4 +71,6 @@ class SubcontasManager
         
         return $data;
     }
+=======
+>>>>>>> upstream/master
 }
