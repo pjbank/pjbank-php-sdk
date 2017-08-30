@@ -54,4 +54,20 @@ class SubcontasManager
         
         return $data;
     }
+    
+    public function consultarSubconta($tokenSubconta)
+    {
+        $subconta = new Subconta($this->credencial_conta, $this->chave_conta);
+        $data = $subconta->consultar($tokenSubconta);
+        
+        return $data;
+    }
+    
+    public function adicionarSaldoSubconta($tokenSubconta, $valor)
+    {
+        $subconta = new Subconta($this->credencial_conta, $this->chave_conta);
+        $data = $subconta->adicionarSaldo($tokenSubconta, $valor);
+        
+        return $data;
+    }
 }
