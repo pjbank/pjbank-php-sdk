@@ -7,6 +7,7 @@
         "email": "matheus.fidelis@superlogica.com"
     }],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "guzzlehttp/guzzle": "^6.2@dev",
         "phpunit/phpunit": "^6.4@dev"
