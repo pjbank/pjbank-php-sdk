@@ -537,10 +537,10 @@ class Boleto
         $emissor = new Emissor($this);
         $boletoGerado = $emissor->emitir();
 
-        $this->nosso_numero = $boletoGerado->nossonumero;
-        $this->id_unico = $boletoGerado->id_unico;
-        $this->linha_digitavel = $boletoGerado->linhaDigitavel;
-        $this->link = $boletoGerado->linkBoleto;
+        $this->nosso_numero = isset($boletoGerado->nossonumero) ? $boletoGerado->nossonumero : null;
+        $this->id_unico = isset($boletoGerado->id_unico) ? $boletoGerado->id_unico : null;
+        $this->linha_digitavel = isset($boletoGerado->linhaDigitavel) ? $boletoGerado->linhaDigitavel : null;
+        $this->link = isset($boletoGerado->linkBoleto) ? $boletoGerado->linkBoleto : null;
     }
 
 
