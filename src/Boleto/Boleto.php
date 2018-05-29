@@ -66,10 +66,10 @@ class Boleto
      */
     private $bairro_cliente;
     /**
-     * UF do cliente final
+     * Estado do cliente final
      * @var
      */
-    private $uf_cliente;
+    private $estado_cliente;
     /**
      * Cidade do cliente final
      * @var
@@ -425,15 +425,22 @@ class Boleto
     }
     
     /**
-     * @param mixed $uf_cliente
+     * @param mixed $estado_cliente
      * @return Boleto
      */
-    public function setUfCliente($uf_cliente)
+    public function setEstadoCliente($estado_cliente)
     {
-        $this->uf_cliente = $uf_cliente;
+        $this->estado_cliente = $estado_cliente;
         return $this;
     }
-
+    
+    /**
+     * @return mixed
+     */
+    function getEstadoCliente() {
+        return $this->estado_cliente;
+    }
+    
     /**
      * @return mixed
      */
