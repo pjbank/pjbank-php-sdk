@@ -66,12 +66,17 @@ class Boleto
      */
     private $bairro_cliente;
     /**
+     * UF do cliente final
+     * @var
+     */
+    private $uf_cliente;
+    /**
      * Cidade do cliente final
      * @var
      */
     private $cidade_cliente;
     /**
-     * Cidade do cliente final
+     * CEP do cliente final
      * @var
      */
     private $cep_cliente;
@@ -416,6 +421,16 @@ class Boleto
     public function setBairroCliente($bairro_cliente)
     {
         $this->bairro_cliente = $bairro_cliente;
+        return $this;
+    }
+    
+    /**
+     * @param mixed $uf_cliente
+     * @return Boleto
+     */
+    public function setUfCliente($uf_cliente)
+    {
+        $this->uf_cliente = $uf_cliente;
         return $this;
     }
 
