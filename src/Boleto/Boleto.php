@@ -564,6 +564,15 @@ class Boleto
         $this->linha_digitavel = isset($boletoGerado->linhaDigitavel) ? $boletoGerado->linhaDigitavel : null;
         $this->link = isset($boletoGerado->linkBoleto) ? $boletoGerado->linkBoleto : null;
     }
+    
+    /**
+     * Gera um boleto bancário no PJBank
+     * via API
+     */
+    public function invalidar() {
+        $emissor = new Emissor($this);
+        return $emissor->invalidar();
+    }
 
 
 }
