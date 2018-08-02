@@ -96,6 +96,11 @@ class Boleto
      */
     private $link;
     /**
+     * Link do Grupo
+     * @var
+     */
+    private $link_grupo;
+    /**
      * Nosso numero de boleto
      * @var
      */
@@ -116,6 +121,12 @@ class Boleto
     private $id_unico;
 
     /**
+     * Usar Sandbox
+     * @var bool
+     */
+    private $sandbox;
+
+    /**
      * @var
      */
     private $chave_boleto;
@@ -125,10 +136,11 @@ class Boleto
      * @param $credencial
      * @param $chave
      */
-    public function __construct($credencial, $chave)
+    public function __construct($credencial, $chave, $sandbox)
     {
         $this->credencial_boleto = $credencial;
         $this->chave_boleto = $chave;
+        $this->sandbox = $sandbox;
     }
 
     /**
@@ -137,6 +149,14 @@ class Boleto
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkGrupo()
+    {
+        return $this->link_grupo;
     }
 
     /**
@@ -509,6 +529,13 @@ class Boleto
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function getSandbox()
+    {
+        return $this->sandbox;
+    }
 
     /**
      * Pega os campos utilizados para a emissão do boleto bancário. 
@@ -541,6 +568,7 @@ class Boleto
         $this->id_unico = $boletoGerado->id_unico;
         $this->linha_digitavel = $boletoGerado->linhaDigitavel;
         $this->link = $boletoGerado->linkBoleto;
+        $this->link_grupo = $boletoGerado->linkGrupo;
     }
 
 

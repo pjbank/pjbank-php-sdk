@@ -26,6 +26,12 @@ class Recebimento
      */
     private $chave;
 
+    /***
+     * Utilzar sandbox
+     * @var bool
+     */
+    private $sandbox;
+
     /**
      * Boleto Manager SDK
      * @var Boleto
@@ -56,10 +62,11 @@ class Recebimento
      * @param string $credencial
      * @param string $chave
      */
-    public function __construct($credencial = null, $chave = null)
+    public function __construct($credencial = null, $chave = null, $sandbox = false)
     {
         $this->credencial = $credencial;
         $this->chave = $chave;
+        $this->sandbox = (bool)$sandbox;
 
         $this->constructorCartao();
         $this->constructorBoletos();
@@ -77,16 +84,14 @@ class Recebimento
      * Constructor Boletos
      */
     private function constructorBoletos() {
-        $this->Boletos = new BoletosManager($this->credencial, $this->chave);
+        $this->Boletos = new BoletosManager($this->credencial, $this->chave, $this->sandbox);
     }
 
     /**
      * Constructor Extrato
      */
     private function constructorExtrato() {
-        $this->Extratos = new ExtratoManager($this->credencial, $this->chave);
+        $this->Extratos = new ExtratoManager($this->credencial, $this->chave, $this->sandbox);
     }
-
-
 
 }

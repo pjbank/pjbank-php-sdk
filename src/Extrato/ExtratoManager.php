@@ -23,14 +23,21 @@ class ExtratoManager
     private $chave_conta;
 
     /**
+     * Usar Sandbox
+     * @var bool
+     */
+    private $sandbox;
+
+    /**
      * ExtratoManager constructor.
      * @param $credencial
      * @param $chave
      */
-    public function __construct($credencial, $chave)
+    public function __construct($credencial, $chave, $sandbox)
     {
         $this->credencial_conta = $credencial;
         $this->chave_conta = $chave;
+        $this->sandbox = $sandbox;
     }
 
     /**
@@ -38,7 +45,7 @@ class ExtratoManager
      * @return Extrato
      */
     public function NovoExtrato() {
-        return new Extrato($this->credencial_conta, $this->chave_conta);
+        return new Extrato($this->credencial_conta, $this->chave_conta, $this->sandbox);
     }
 
 }

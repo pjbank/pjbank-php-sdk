@@ -24,14 +24,21 @@ class BoletosManager
     private $chave_boletos;
 
     /**
+     * Usar Sandbox
+     * @var bool
+     */
+    private $sandbox;
+
+    /**
      * BoletosManager constructor.
      * @param $credencial
      * @param $boletos
      */
-    public function __construct($credencial, $chave)
+    public function __construct($credencial, $chave, $sandbox)
     {
         $this->credencial_boletos = $credencial;
         $this->chave_boletos = $chave;
+        $this->sandbox = $sandbox;
     }
 
     /**
@@ -39,7 +46,7 @@ class BoletosManager
      * @return \PJBank\Boleto\Boleto
      */
     public function NovoBoleto() {
-        return new Boleto($this->credencial_boletos, $this->chave_boletos);
+        return new Boleto($this->credencial_boletos, $this->chave_boletos, $this->sandbox);
     }
 
     /**
