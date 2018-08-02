@@ -35,8 +35,8 @@ class Emissor
     public function emitir()
     {
 
-        $PJBankClient = new PJBankClient();
-        $client = $PJBankClient->getClient();        
+        $PJBankClient = new PJBankClient($this->boleto->getSandbox());
+        $client = $PJBankClient->getClient();
         $boletoItens = $this->boleto->getValues();
 
         try {
@@ -56,8 +56,6 @@ class Emissor
             throw new \Exception($responseBody->msg, $responseBody->status);
 
         }
-
-
 
     }
 }

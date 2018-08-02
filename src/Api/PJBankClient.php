@@ -19,11 +19,12 @@ class PJBankClient extends Api
      * @param [type] $chave
      * @return void
      */
-    public function __construct()
+    public function __construct($sandbox=false)
     {
+        $base_uri = ($sandbox) ? $this->apiBaseUrlSandbox : $this->apiBaseUrl;
 
         $this->client = new Client([
-            'base_uri' => $this->apiBaseUrl,
+            'base_uri' => $base_uri,
         ]);
 
     }
@@ -36,6 +37,4 @@ class PJBankClient extends Api
     {
         return $this->client;
     }
-
-
 }
