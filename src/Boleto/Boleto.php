@@ -105,6 +105,11 @@ class Boleto
      * @var
      */
     private $pedido_numero;
+    /**
+     * Texto opcional na parte superior do boleto impresso
+     * @var string
+     */
+    private $instrucao_adicional;
 
     /**
      * @var
@@ -509,6 +514,23 @@ class Boleto
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getInstrucaoAdicional()
+    {
+        return $this->instrucao_adicional;
+    }
+
+    /**
+     * @param string $instrucao_adicional
+     * @return Boleto
+     */
+    public function setInstrucaoAdicional($instrucao_adicional)
+    {
+        $this->instrucao_adicional = $instrucao_adicional;
+        return $this;
+    }
 
     /**
      * Pega os campos utilizados para a emissão do boleto bancário. 
