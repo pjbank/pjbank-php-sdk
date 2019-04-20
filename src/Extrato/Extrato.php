@@ -199,7 +199,7 @@ class Extrato
         $impressorinha = new Impressorinha($this);
         $extrato = $impressorinha->gerar();
 
-        $this->itens = $extrato->extrato;
+        $this->itens = $extrato;
 
     }
 
