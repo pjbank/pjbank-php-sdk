@@ -10,7 +10,7 @@
     "prefer-stable": true,
     "require": {
         "guzzlehttp/guzzle": "^6.2@dev",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "^6.4"
     },
     "scripts" : {
         "test" : "./vendor/bin/phpunit --colors --debug",
