@@ -58,4 +58,31 @@ class Emissor
         }
 
     }
+
+    /**
+     * Invalida um boleto bancário via API
+     * @return string
+     */
+    public function invalidar()
+    {
+        $PJBankClient = new PJBankClient($this->boleto->getSandbox());
+        $client = $PJBankClient->getClient();
+
+        try {
+            $resource = "recebimentos/{$this->boleto->getCredencialBoleto()}/transacoes/{$this->boleto->getPedidoNumero()}";
+
+            $res = $client->request('DELETE',  $resource, [
+                'headers' => [
+                    'Content-Type' => 'Application/json',
+                    'X-CHAVE' => $this->boleto->getChaveBoleto()
+                ]
+            ]);
+
+            return json_decode((string) $res->getBody());
+
+        } catch (ClientException $e) {
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+        }
+    }
 }

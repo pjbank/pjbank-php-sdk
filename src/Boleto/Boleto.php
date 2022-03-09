@@ -586,5 +586,12 @@ class Boleto
         $this->link_grupo = $boletoGerado->linkGrupo;
     }
 
-
+    /**
+     * Invalida um boleto bancário no PJBank via API.
+     * @return void
+     */
+    public function invalidar() {
+        $emissor = new Emissor($this);
+        $emissor->invalidar();
+    }
 }
