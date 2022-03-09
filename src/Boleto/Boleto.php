@@ -81,6 +81,11 @@ class Boleto
      */
     private $logo_url;
     /**
+     * Link do webhook no boleto
+     * @var
+     */
+    private $webhook;
+    /**
      * Texto opcional do corpo do boleto
      * @var
      */
@@ -490,6 +495,16 @@ class Boleto
     public function setLogoUrl($logo_url)
     {
         $this->logo_url = $logo_url;
+        return $this;
+    }
+
+    /**
+     * @param string $webhook
+     * @return Boleto
+     */
+    public function setWebhook($webhook)
+    {
+        $this->webhook = $webhook;
         return $this;
     }
 
