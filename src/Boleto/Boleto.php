@@ -86,6 +86,11 @@ class Boleto
      */
     private $webhook;
     /**
+     * Pix emitido junto ao boleto
+     * @var
+     */
+    private $pix;
+    /**
      * Texto opcional do corpo do boleto
      * @var
      */
@@ -505,6 +510,19 @@ class Boleto
     public function setWebhook($webhook)
     {
         $this->webhook = $webhook;
+        return $this;
+    }
+
+    /**
+     * Informe "pix-e-boleto" para que seja emitido junto ao boleto
+     * o QRCode do Pix ou "pix" para o boleto ser substituído pelo
+     * QRCode do Pix.
+     * @param string $webhook
+     * @return Boleto
+     */
+    public function setPix($pix = 'pix-e-boleto')
+    {
+        $this->pix = $pix;
         return $this;
     }
 
