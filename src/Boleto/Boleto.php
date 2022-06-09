@@ -571,6 +571,16 @@ class Boleto
     }
 
     /**
+     * Exibe sempre o Nome Fantasia no PDF.
+     * @return Boleto
+     */
+    public function showFantasia()
+    {
+        $this->exibir_fantasia = '1';
+        return $this;
+    }
+
+    /**
      * Pega os campos utilizados para a emissão do boleto bancário. 
      * @return array
      */
