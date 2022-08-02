@@ -60,6 +60,39 @@ class Emissor
     }
 
     /**
+     * Consulta uma transação via API
+     * @return array
+     */
+    public function consultar($id_unico)
+    {
+        $PJBankClient = new PJBankClient($this->boleto->getSandbox());
+        $client = $PJBankClient->getClient();
+
+        try {
+            $resource = "recebimentos/{$this->boleto->getCredencialBoleto()}/transacoes/$id_unico";
+
+            $res = $client->request('GET',  $resource, [
+                'headers' => [
+                    'Content-Type' => 'Application/json',
+                    'X-CHAVE' => $this->boleto->getChaveBoleto()
+                ]
+            ]);
+
+            $response = json_decode((string) $res->getBody(), true);
+            if(array_key_exists(0, $response)) {
+                return $response[0];
+            }
+            else {
+                return $response;
+            }
+
+        } catch (ClientException $e) {
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+        }
+    }
+
+    /**
      * Invalida um boleto bancário via API
      * @return string
      */
