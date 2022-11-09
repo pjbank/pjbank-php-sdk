@@ -9,7 +9,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "guzzlehttp/guzzle": "^6.2@dev"
+        "guzzlehttp/guzzle": "^7.0.1"
     },
     "scripts" : {
         "test" : "./vendor/bin/phpunit --colors --debug",
