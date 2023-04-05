@@ -21,27 +21,25 @@ class BoletosTest extends \PHPUnit\Framework\TestCase {
             ->setPedidoNumero(rand(0, 999))
             ->gerar();
 
-        $this->assertObjectHasAttribute('vencimento', $boleto);
-        $this->assertObjectHasAttribute('valor', $boleto);
-        $this->assertObjectHasAttribute('juros', $boleto);
-        $this->assertObjectHasAttribute('multa', $boleto);
-        $this->assertObjectHasAttribute('desconto', $boleto);
-        $this->assertObjectHasAttribute('nome_cliente', $boleto);
-        $this->assertObjectHasAttribute('cpf_cliente', $boleto);
-        $this->assertObjectHasAttribute('endereco_cliente', $boleto);
-        $this->assertObjectHasAttribute('numero_cliente', $boleto);
-        $this->assertObjectHasAttribute('complemento_cliente', $boleto);
-        $this->assertObjectHasAttribute('bairro_cliente', $boleto);
-        $this->assertObjectHasAttribute('cidade_cliente', $boleto);
-        $this->assertObjectHasAttribute('numero_cliente', $boleto);
-        $this->assertObjectHasAttribute('texto', $boleto);
-        $this->assertObjectHasAttribute('logo_url', $boleto);
-        $this->assertObjectHasAttribute('grupo', $boleto);
-        $this->assertObjectHasAttribute('link', $boleto);
-        $this->assertObjectHasAttribute('linha_digitavel', $boleto);
-        $this->assertObjectHasAttribute('id_unico', $boleto);
-        
-
+        $this->assertIsObject($boleto);
+        $this->assertTrue(property_exists($boleto, 'vencimento'));
+        $this->assertTrue(property_exists($boleto, 'valor'));
+        $this->assertTrue(property_exists($boleto, 'juros'));
+        $this->assertTrue(property_exists($boleto, 'multa'));
+        $this->assertTrue(property_exists($boleto, 'desconto'));
+        $this->assertTrue(property_exists($boleto, 'nome_cliente'));
+        $this->assertTrue(property_exists($boleto, 'cpf_cliente'));
+        $this->assertTrue(property_exists($boleto, 'endereco_cliente'));
+        $this->assertTrue(property_exists($boleto, 'numero_cliente'));
+        $this->assertTrue(property_exists($boleto, 'complemento_cliente'));
+        $this->assertTrue(property_exists($boleto, 'bairro_cliente'));
+        $this->assertTrue(property_exists($boleto, 'cidade_cliente'));
+        $this->assertTrue(property_exists($boleto, 'numero_cliente'));
+        $this->assertTrue(property_exists($boleto, 'texto'));
+        $this->assertTrue(property_exists($boleto, 'logo_url'));
+        $this->assertTrue(property_exists($boleto, 'grupo'));
+        $this->assertTrue(property_exists($boleto, 'link'));
+        $this->assertTrue(property_exists($boleto, 'linha_digitavel'));
+        $this->assertTrue(property_exists($boleto, 'id_unico'));
     }
-
 }
