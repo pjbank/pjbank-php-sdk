@@ -35,16 +35,16 @@ class Impressorinha
     public function gerar()
     {
 
-        $PJBankClient = new PJBankClient();
+        $PJBankClient = new PJBankClient($this->extrato->getSandbox());
         $client = $PJBankClient->getClient();
 
         $extratoQuery = $this->extrato->getValues();
 
         unset($extratoQuery['credencial']);
         unset($extratoQuery['chave']);
+        unset($extratoQuery['sandbox']);
 
         try {
-
             $resource = "recebimentos/{$this->extrato->getCredencial()}/transacoes";
 
             $res = $client->request('GET',  $resource, ['query' => $extratoQuery, 'headers' => [
@@ -55,7 +55,8 @@ class Impressorinha
             return json_decode((string) $res->getBody());
 
         } catch (ClientException $e) {
-
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
         }
     }
 

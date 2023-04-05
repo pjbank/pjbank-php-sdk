@@ -81,6 +81,16 @@ class Boleto
      */
     private $logo_url;
     /**
+     * Link do webhook no boleto
+     * @var
+     */
+    private $webhook;
+    /**
+     * Pix emitido junto ao boleto
+     * @var
+     */
+    private $pix;
+    /**
      * Texto opcional do corpo do boleto
      * @var
      */
@@ -95,6 +105,11 @@ class Boleto
      * @var
      */
     private $link;
+    /**
+     * Link do Grupo
+     * @var
+     */
+    private $link_grupo;
     /**
      * Nosso numero de boleto
      * @var
@@ -116,6 +131,12 @@ class Boleto
     private $id_unico;
 
     /**
+     * Usar Sandbox
+     * @var bool
+     */
+    private $sandbox;
+
+    /**
      * @var
      */
     private $chave_boleto;
@@ -125,10 +146,11 @@ class Boleto
      * @param $credencial
      * @param $chave
      */
-    public function __construct($credencial, $chave)
+    public function __construct($credencial, $chave, $sandbox)
     {
         $this->credencial_boleto = $credencial;
         $this->chave_boleto = $chave;
+        $this->sandbox = $sandbox;
     }
 
     /**
@@ -137,6 +159,14 @@ class Boleto
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkGrupo()
+    {
+        return $this->link_grupo;
     }
 
     /**
@@ -474,6 +504,29 @@ class Boleto
     }
 
     /**
+     * @param string $webhook
+     * @return Boleto
+     */
+    public function setWebhook($webhook)
+    {
+        $this->webhook = $webhook;
+        return $this;
+    }
+
+    /**
+     * Informe "pix-e-boleto" para que seja emitido junto ao boleto
+     * o QRCode do Pix ou "pix" para o boleto ser substituído pelo
+     * QRCode do Pix.
+     * @param string $webhook
+     * @return Boleto
+     */
+    public function setPix($pix = 'pix-e-boleto')
+    {
+        $this->pix = $pix;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getTexto()
@@ -509,6 +562,23 @@ class Boleto
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function getSandbox()
+    {
+        return $this->sandbox;
+    }
+
+    /**
+     * Exibe sempre o Nome Fantasia no PDF.
+     * @return Boleto
+     */
+    public function showFantasia()
+    {
+        $this->exibir_fantasia = '1';
+        return $this;
+    }
 
     /**
      * Pega os campos utilizados para a emissão do boleto bancário. 
@@ -541,7 +611,15 @@ class Boleto
         $this->id_unico = $boletoGerado->id_unico;
         $this->linha_digitavel = $boletoGerado->linhaDigitavel;
         $this->link = $boletoGerado->linkBoleto;
+        $this->link_grupo = $boletoGerado->linkGrupo;
     }
 
-
+    /**
+     * Invalida um boleto bancário no PJBank via API.
+     * @return void
+     */
+    public function invalidar() {
+        $emissor = new Emissor($this);
+        $emissor->invalidar();
+    }
 }

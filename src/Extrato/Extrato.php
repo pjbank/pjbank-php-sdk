@@ -54,6 +54,12 @@ class Extrato
     private $itens;
 
     /**
+     * Usar Sandbox
+     * @var bool
+     */
+    private $sandbox;
+
+    /**
      * @return mixed
      */
     public function getCredencial()
@@ -87,6 +93,14 @@ class Extrato
     {
         $this->chave = $chave;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSandbox()
+    {
+        return $this->sandbox;
     }
 
     /**
@@ -137,7 +151,7 @@ class Extrato
      * @param mixed $pago
      * @return Extrato
      */
-    public function apenasPagos($pago = true)
+    public function apenasPagos($pago = 1)
     {
         $this->pago = $pago;
         return $this;
@@ -158,10 +172,11 @@ class Extrato
      * @param $credencial
      * @param $chave
      */
-    public function __construct($credencial, $chave)
+    public function __construct($credencial, $chave, $sandbox)
     {
         $this->credencial = $credencial;
         $this->chave = $chave;
+        $this->sandbox = $sandbox;
     }
 
     /**
@@ -194,13 +209,12 @@ class Extrato
     /**
      * Gera o extrato propriamente dito
      */
-    public function gerar() {
-
+    public function gerar()
+    {
         $impressorinha = new Impressorinha($this);
         $extrato = $impressorinha->gerar();
 
-        $this->itens = $extrato->extrato;
-
+        $this->itens = $extrato;
     }
 
 }

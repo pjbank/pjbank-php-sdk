@@ -17,6 +17,12 @@ class Api
     protected $apiBaseUrl = "https://api.pjbank.com.br/";
 
     /**
+     * URL base da API Sandbox
+     * @var string
+     */
+    protected $apiBaseUrlSandbox = "https://sandbox.pjbank.com.br";
+
+    /**
      * Versão da API a ser consumida pelo SDK
      * @var string
      */
