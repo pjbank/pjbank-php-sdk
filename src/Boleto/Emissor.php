@@ -38,6 +38,8 @@ class Emissor
         $PJBankClient = new PJBankClient();
         $client = $PJBankClient->getClient();        
         $boletoItens = $this->boleto->getValues();
+        
+        $boletoItens['pix'] = 'pix-e-boleto';
 
         try {
 
