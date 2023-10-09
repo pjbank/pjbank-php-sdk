@@ -38,6 +38,8 @@ class Emissor
         $PJBankClient = new PJBankClient();
         $client = $PJBankClient->getClient();        
         $boletoItens = $this->boleto->getValues();
+        
+        $boletoItens['pix'] = 'pix-e-boleto';
 
         try {
 
@@ -56,8 +58,38 @@ class Emissor
             throw new \Exception($responseBody->msg, $responseBody->status);
 
         }
-
-
-
+        
     }
+
+    /**
+     * Invalida um boleto bancário via API
+     * @return Boleto
+     */
+    public function invalidar()
+    {
+
+        $PJBankClient = new PJBankClient();
+        $client = $PJBankClient->getClient();        
+        $boletoItens = $this->boleto->getValues();
+
+        try {
+
+            $resource = "recebimentos/{$this->boleto->getCredencialBoleto()}/transacoes/{$this->boleto->getPedidoNumero()}";
+
+            $res = $client->request('DELETE',  $resource, ['json' => $boletoItens, 'headers' => [
+                'Content-Type' => 'Application/json',
+                'X-CHAVE' => $this->boleto->getChaveBoleto()
+            ]]);
+
+            return json_decode((string) $res->getBody());
+
+        } catch (ClientException $e) {
+
+            $responseBody = json_decode($e->getResponse()->getBody());
+            throw new \Exception($responseBody->msg, $responseBody->status);
+
+        }
+        
+    }
+    
 }

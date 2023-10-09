@@ -66,12 +66,17 @@ class Boleto
      */
     private $bairro_cliente;
     /**
+     * Estado do cliente final
+     * @var
+     */
+    private $estado_cliente;
+    /**
      * Cidade do cliente final
      * @var
      */
     private $cidade_cliente;
     /**
-     * Cidade do cliente final
+     * CEP do cliente final
      * @var
      */
     private $cep_cliente;
@@ -418,7 +423,24 @@ class Boleto
         $this->bairro_cliente = $bairro_cliente;
         return $this;
     }
-
+    
+    /**
+     * @param mixed $estado_cliente
+     * @return Boleto
+     */
+    public function setEstadoCliente($estado_cliente)
+    {
+        $this->estado_cliente = $estado_cliente;
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    function getEstadoCliente() {
+        return $this->estado_cliente;
+    }
+    
     /**
      * @return mixed
      */
@@ -537,10 +559,19 @@ class Boleto
         $emissor = new Emissor($this);
         $boletoGerado = $emissor->emitir();
 
-        $this->nosso_numero = $boletoGerado->nossonumero;
-        $this->id_unico = $boletoGerado->id_unico;
-        $this->linha_digitavel = $boletoGerado->linhaDigitavel;
-        $this->link = $boletoGerado->linkBoleto;
+        $this->nosso_numero = isset($boletoGerado->nossonumero) ? $boletoGerado->nossonumero : null;
+        $this->id_unico = isset($boletoGerado->id_unico) ? $boletoGerado->id_unico : null;
+        $this->linha_digitavel = isset($boletoGerado->linhaDigitavel) ? $boletoGerado->linhaDigitavel : null;
+        $this->link = isset($boletoGerado->linkBoleto) ? $boletoGerado->linkBoleto : null;
+    }
+    
+    /**
+     * Gera um boleto bancário no PJBank
+     * via API
+     */
+    public function invalidar() {
+        $emissor = new Emissor($this);
+        return $emissor->invalidar();
     }
 
 
